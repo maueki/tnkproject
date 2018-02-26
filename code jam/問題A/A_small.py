@@ -1,17 +1,11 @@
-#! python3
-# coding: utf-8
-import os
+#!/usr/bin/env python3
+#-*- coding: utf-8 -*-
 
-#読み込むファイルの指定
-inp = os.path.dirname(__file__)+"\A-small-practice.in"
-oup = os.path.dirname(__file__)+"\A-small-output.txt"
+import os
+import sys
 
 #入力ファイルの読み込み
-f = open(inp, 'r')
-numofline = int(f.readline()) #行数
-
-#出力ファイルの読み込み
-g = open(oup, 'w')
+numofline = int(sys.stdin.readline()) #行数
 
 #カットする処理
 def cut(cardlist, n, m):
@@ -20,13 +14,9 @@ def cut(cardlist, n, m):
     return cutted + clist #抜き出した部分を上に乗せる
 
 for i in range(numofline):
-    M, C, W = tuple([int(x) for x in f.readline().split()])
+    M, C, W = [int(x) for x in sys.stdin.readline().split()]
     cardlist = list(range(1, M + 1)) #カードの初期順序
     for times in range(C):
-        A, B = tuple([int(x) for x in f.readline().split()])
+        A, B = [int(x) for x in sys.stdin.readline().split()]
         cardlist = cut(cardlist, A, B)
-    g.write("Case #" + str(i + 1) + ": " + str(cardlist[W-1]) + "\n")
-    
-f.close()
-g.close()
-print("終了")
+    print("Case #" + str(i + 1) + ": " + str(cardlist[W-1]))
